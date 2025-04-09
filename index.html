@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sustainability</title>
+        <link rel="stylesheet" href="sustainability.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#practices">Practices</a></li>
+                    <li><a href="#teams">Teams</a></li>
+                    <li><a href="activity-points.html" class="active">Activity
+                        Points</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="hero">
+                <div class="logo-container">
+                    <img src="img/lego.jpg" alt="UBT Sustainability Logo"
+                        class="logo"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <p class="logo-error"
+                        style="display: none; color: #666; margin-bottom: 1rem;">Loading
+                        logo...</p>
+                </div>
+                <h1>Sustainability</h1>
+                <p>Building a better future through sustainable practices</p>
+            </section>
+
+            <section id="about">
+                <h2>About Sustainability</h2>
+                <p>Sustainability is about meeting our current needs without
+                    compromising the ability of future generations to meet their
+                    own needs.</p>
+            </section>
+
+            <section id="practices">
+                <h2>Sustainable Practices</h2>
+                <div class="practice-grid">
+                    <div class="practice-card">
+                        <h3>Renewable Energy</h3>
+                        <p>Harnessing clean, renewable energy sources for a
+                            greener future.</p>
+                    </div>
+                    <div class="practice-card">
+                        <h3>Waste Reduction</h3>
+                        <p>Minimizing waste through recycling and responsible
+                            consumption.</p>
+                    </div>
+                    <div class="practice-card">
+                        <h3>Water Conservation</h3>
+                        <p>Protecting and preserving our water resources.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="teams">
+                <h2>Our Teams</h2>
+                <div class="teams-container">
+                    <div class="team-filters">
+                        <button class="filter-btn active" data-team="all">All
+                            Teams</button>
+                        <button class="filter-btn"
+                            data-team="Social Media Team ">Social Media</button>
+                        <button class="filter-btn"
+                            data-team="Public Relation Team">Public
+                            Relations</button>
+                        <button class="filter-btn"
+                            data-team="Management Team ">Management</button>
+                        <button class="filter-btn"
+                            data-team="Design Team ">Design</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="team-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Team</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody id="team-members">
+                                <!-- Team members will be loaded here via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Sustainability. All rights reserved.</p>
+        </footer>
+
+        <script>
+        // Fetch and display team data
+        async function fetchTeamData() {
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzm8f_YT3xz0s4bbFGpOiYDLhV1gBaHrqZj3CLP4Hp2lsapURKzLIN_7ol11oN5TUot/exec');
+                const data = await response.json();
+                displayTeamMembers(data.data);
+                setupFilters(data.data);
+            } catch (error) {
+                console.error('Error fetching team data:', error);
+            }
+        }
+
+        function displayTeamMembers(members, filter = 'all') {
+            const container = document.getElementById('team-members');
+            container.innerHTML = '';
+            
+            const filteredMembers = filter === 'all' 
+                ? members 
+                : members.filter(member => member.TEAM.trim() === filter.trim());
+
+            filteredMembers.forEach(member => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${member.DISTRICT}</td>
+                    <td>${member.TEAM}</td>
+                    <td>${member.POINTS || 0}</td>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function setupFilters(members) {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filter and display members
+                    const filter = button.dataset.team;
+                    displayTeamMembers(members, filter);
+                });
+            });
+        }
+
+        // Load team data when page loads
+        document.addEventListener('DOMContentLoaded', fetchTeamData);
+    </script>
+    </body>
+</html>

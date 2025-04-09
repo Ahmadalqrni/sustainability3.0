@@ -1,0 +1,298 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-image: url(img/rm222batch3-mind-06.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: -1;
+}
+
+/* Header and Navigation */
+header {
+  background-color: rgba(44, 85, 48, 0.95);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #a8e6cf;
+}
+
+/* Main content */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 4rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+/* Hero section */
+#hero {
+  text-align: center;
+  padding: 4rem 0;
+  background-color: rgba(245, 245, 245, 0.95);
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+}
+
+.logo {
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #2c5530;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #2c5530;
+  margin-bottom: 1.5rem;
+}
+
+/* Practice cards */
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.practice-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.practice-card:hover {
+  transform: translateY(-5px);
+}
+
+.practice-card h3 {
+  color: #2c5530;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+  background-color: #2c5530;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+}
+
+/* Teams section */
+.teams-container {
+  padding: 2rem 0;
+}
+
+.team-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: #f5f5f5;
+  color: #2c5530;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #2c5530;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #2c5530;
+  color: white;
+}
+
+.filter-btn.active {
+  background-color: #2c5530;
+  color: white;
+}
+
+/* Table styles */
+.table-container {
+  overflow-x: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+#team-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 1rem;
+}
+
+#team-table thead {
+  background-color: #2c5530;
+  color: white;
+}
+
+#team-table th,
+#team-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#team-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#team-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+#team-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+#team-table td:last-child {
+  font-weight: bold;
+  color: #2c5530;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .practice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-btn {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+
+  #team-table {
+    font-size: 0.9rem;
+  }
+
+  #team-table th,
+  #team-table td {
+    padding: 0.8rem;
+  }
+}
+
+/* About section */
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.05);
+}
+
+.featured-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
