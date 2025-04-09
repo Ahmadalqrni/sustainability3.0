@@ -5,6 +5,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sustainability</title>
         <link rel="stylesheet" href="sustainability.css">
+        <style>
+            /* Medal styles with increased visibility */
+            tr.gold-member {
+                background-color: #FFD700 !important;
+            }
+            
+            tr.silver-member {
+                background-color: #C0C0C0 !important;
+            }
+            
+            tr.bronze-member {
+                background-color: #CD7F32 !important;
+            }
+            
+            tr.gold-member td, 
+            tr.silver-member td, 
+            tr.bronze-member td {
+                font-weight: bold;
+                color: black;
+            }
+
+            /* Table styles to ensure backgrounds are visible */
+            #team-table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #team-table tr {
+                border-bottom: 1px solid #ddd;
+            }
+
+            #team-table td {
+                padding: 8px;
+            }
+
+            .table-container {
+                margin: 20px 0;
+                overflow-x: auto;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -14,8 +54,6 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#practices">Practices</a></li>
                     <li><a href="#teams">Teams</a></li>
-                    <li><a href="activity-points.html" class="active">Activity
-                        Points</a></li>
                 </ul>
             </nav>
         </header>
@@ -23,7 +61,7 @@
         <main>
             <section id="hero">
                 <div class="logo-container">
-                    <img src="img/lego.jpg" alt="UBT Sustainability Logo"
+                    <img src="../img/lego.jpg" alt="UBT Sustainability Logo"
                         class="logo"
                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <p class="logo-error"
@@ -120,15 +158,40 @@
                 ? members 
                 : members.filter(member => member.TEAM.trim() === filter.trim());
 
-            filteredMembers.forEach(member => {
+            // Sort members by points in descending order
+            const sortedMembers = [...filteredMembers].sort((a, b) => {
+                const pointsA = parseInt(b.POINTS) || 0;
+                const pointsB = parseInt(a.POINTS) || 0;
+                return pointsA - pointsB;
+            });
+
+            // Display members with rankings
+            sortedMembers.forEach((member, index) => {
                 const row = document.createElement('tr');
+                const position = index + 1;
+                
+                // Add medal classes based on position only
+                if (position === 1) {
+                    row.className = 'gold-member';
+                    console.log('Added gold to position 1');
+                } else if (position === 2) {
+                    row.className = 'silver-member';
+                    console.log('Added silver to position 2');
+                } else if (position === 3) {
+                    row.className = 'bronze-member';
+                    console.log('Added bronze to position 3');
+                }
+                
                 row.innerHTML = `
                     <td>${member.DISTRICT}</td>
                     <td>${member.TEAM}</td>
-                    <td>${member.POINTS || 0}</td>
+                    <td>${parseInt(member.POINTS) || 0}</td>
                 `;
                 container.appendChild(row);
             });
+
+            // Debug log
+            console.log('Total members displayed:', sortedMembers.length);
         }
 
         function setupFilters(members) {
