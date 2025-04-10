@@ -73,6 +73,8 @@ section {
 
 /* Hero section */
 #hero {
+  background-image: url(img/Seedlings-e1674615071567.jpeg);
+  background-size: cover;
   text-align: center;
   padding: 4rem 0;
   background-color: rgba(245, 245, 245, 0.95);
@@ -93,8 +95,11 @@ section {
 
 h1 {
   font-size: 3rem;
-  color: #2c5530;
+  color: #5b7d5f;
   margin-bottom: 1rem;
+}
+.head-line p {
+  color: white;
 }
 
 h2 {
